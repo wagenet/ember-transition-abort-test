@@ -16,6 +16,10 @@ env:
   global:
     # See https://git.io/vdao3 for details.
     - JOBS=1
+  matrix:
+    - SCENARIO=latest
+    - SCENARIO=beta
+    - SCENARIO=canary
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
@@ -27,4 +31,4 @@ install:
 script:
   - yarn lint:hbs
   - yarn lint:js
-  - yarn test
+  - ember try:one $SCENARIO --skip-cleanup
